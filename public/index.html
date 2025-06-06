@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>복지정책 통합안내 - AI 챗봇 서비스</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>복지정책 통합안내</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">홈</a>
+                    <a href="#services" class="nav-link">서비스</a>
+                    <a href="#guide" class="nav-link">이용안내</a>
+                    <a href="#contact" class="nav-link">문의</a>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="highlight">AI 기반</span> 복지정책<br>
+                        통합 안내 서비스
+                    </h1>
+                    <p class="hero-description">
+                        복잡하고 파편화된 정부 및 지자체의 복지 혜택을 한 곳에서 쉽게 찾아보세요.<br>
+                        맞춤형 안내와 신청 절차까지 상세히 알려드립니다.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="startChat()">
+                            <i class="fas fa-comments"></i>
+                            지금 상담받기
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            서비스 소개
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="chat-preview">
+                        <div class="chat-header">
+                            <div class="chat-status">
+                                <div class="status-dot"></div>
+                                <span>AI 상담사 온라인</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message bot-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    안녕하세요! 복지정책 통합안내 AI입니다. 어떤 도움이 필요하신가요?
+                                </div>
+                            </div>
+                            <div class="message user-message">
+                                <div class="message-content">
+                                    육아 관련 지원 혜택을 알고 싶어요
+                                </div>
+                            </div>
+                            <div class="message bot-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    육아 지원 혜택을 안내해드릴게요. 먼저 몇 가지 정보를 알려주세요...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">주요 서비스</h2>
+                <p class="section-description">AI 기반 맞춤형 복지정책 안내 서비스의 핵심 기능들</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="feature-title">맞춤형 혜택 검색</h3>
+                    <p class="feature-description">개인 상황에 맞는 복지 혜택을 AI가 자동으로 찾아드립니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="feature-title">신청 절차 안내</h3>
+                    <p class="feature-description">복잡한 신청 절차와 필요 서류를 단계별로 상세히 안내합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="feature-title">실시간 업데이트</h3>
+                    <p class="feature-description">최신 정책 변경사항과 새로운 혜택 정보를 실시간으로 제공합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">24시간 상담</h3>
+                    <p class="feature-description">언제든지 AI 상담사와 대화하며 궁금한 점을 해결하세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <span>복지정책 AI 상담</span>
+            </div>
+            <button class="chat-close" onclick="closeChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="welcome-message">
+                <div class="welcome-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="welcome-content">
+                    <h3>안녕하세요! 복지정책 통합안내 AI입니다.</h3>
+                    <p>궁금한 복지 혜택이나 정책에 대해 언제든 물어보세요.</p>
+                    <div class="quick-buttons">
+                        <button class="quick-btn" onclick="sendQuickMessage('육아 지원 혜택')">육아 지원</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('노인 복지 혜택')">노인 복지</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('청년 지원 정책')">청년 지원</button>
+                        <button class="quick-btn" onclick="sendQuickMessage('장애인 복지')">장애인 복지</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <div class="input-container">
+                <input type="text" id="messageInput" placeholder="궁금한 복지 혜택을 물어보세요..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">등록된 복지 혜택</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">월간 상담 건수</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">사용자 만족도</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">연중무휴 서비스</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section class="guide" id="guide">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">이용 방법</h2>
+                <p class="section-description">간단한 3단계로 맞춤형 복지 혜택을 찾아보세요</p>
+            </div>
+            <div class="guide-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>상담 시작</h3>
+                        <p>AI 챗봇과 대화를 시작하고 기본 정보를 입력하세요.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>맞춤 분석</h3>
+                        <p>AI가 개인 상황을 분석하여 적합한 혜택을 찾아드립니다.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>신청 안내</h3>
+                        <p>필요 서류와 신청 절차를 단계별로 상세히 안내받으세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>복지정책 통합안내</span>
+                    </div>
+                    <p>모든 국민이 쉽게 복지 혜택을 찾을 수 있도록 돕는 AI 서비스입니다.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="#">복지 혜택 검색</a></li>
+                        <li><a href="#">신청 절차 안내</a></li>
+                        <li><a href="#">정책 업데이트</a></li>
+                        <li><a href="#">AI 상담</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>지원</h4>
+                    <ul>
+                        <li><a href="#">이용 가이드</a></li>
+                        <li><a href="#">자주 묻는 질문</a></li>
+                        <li><a href="#">고객 지원</a></li>
+                        <li><a href="#">피드백</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>연락처</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 1588-0000</p>
+                        <p><i class="fas fa-envelope"></i> support@welfare-ai.kr</p>
+                        <p><i class="fas fa-clock"></i> 평일 09:00-18:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 복지정책 통합안내. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

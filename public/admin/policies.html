@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>복지 정책 관리 - 복지정책 통합안내 관리자</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-panel">
+    <!-- Sidebar (Same as dashboard.html) -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i>
+                <span>복지정책 통합안내</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <h4>관리자</h4>
+                <p>최고 관리자</p>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>대시보드</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="policies.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>복지 정책 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="categories.html">
+                        <i class="fas fa-folder"></i>
+                        <span>카테고리 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inquiries.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>문의 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chatbot.html">
+                        <i class="fas fa-robot"></i>
+                        <span>챗봇 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="users.html">
+                        <i class="fas fa-users"></i>
+                        <span>사용자 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>설정</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>로그아웃</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-left">
+                <h1>복지 정책 관리</h1>
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">홈</a>
+                    <span>/</span>
+                    <span>복지 정책 관리</span>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="정책 검색...">
+                </div>
+                <div class="notifications">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>관리자</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Policy Management Tools -->
+            <div class="management-tools">
+                <div class="tool-group">
+                    <button class="btn btn-primary" id="addPolicyBtn">
+                        <i class="fas fa-plus"></i> 새 정책 추가
+                    </button>
+                    <button class="btn btn-secondary" id="importPolicyBtn">
+                        <i class="fas fa-file-import"></i> 일괄 가져오기
+                    </button>
+                    <button class="btn btn-secondary" id="exportPolicyBtn">
+                        <i class="fas fa-file-export"></i> 내보내기
+                    </button>
+                </div>
+                <div class="tool-group">
+                    <div class="filter-dropdown">
+                        <select id="categoryFilter">
+                            <option value="">모든 카테고리</option>
+                            <option value="육아">육아 지원</option>
+                            <option value="노인">노인 복지</option>
+                            <option value="청년">청년 지원</option>
+                            <option value="장애인">장애인 복지</option>
+                            <option value="고용">고용 지원</option>
+                            <option value="주거">주거 지원</option>
+                            <option value="교육">교육 지원</option>
+                            <option value="의료">의료 지원</option>
+                        </select>
+                    </div>
+                    <div class="filter-dropdown">
+                        <select id="statusFilter">
+                            <option value="">모든 상태</option>
+                            <option value="active">활성</option>
+                            <option value="inactive">비활성</option>
+                            <option value="draft">초안</option>
+                            <option value="expired">만료됨</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policies Table -->
+            <div class="card">
+                <div class="card-body">
+                    <table class="data-table policy-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th>ID</th>
+                                <th>정책명</th>
+                                <th>카테고리</th>
+                                <th>대상</th>
+                                <th>지원 내용</th>
+                                <th>상태</th>
+                                <th>마지막 수정일</th>
+                                <th>작업</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P001</td>
+                                <td>아동수당</td>
+                                <td>육아 지원</td>
+                                <td>만 8세 미만 아동</td>
+                                <td>월 10만원 지급</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-06-01</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P002</td>
+                                <td>육아휴직급여</td>
+                                <td>육아 지원</td>
+                                <td>고용보험 가입자</td>
+                                <td>급여의 80% 지급</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-05-15</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P003</td>
+                                <td>기초연금</td>
+                                <td>노인 복지</td>
+                                <td>만 65세 이상 소득하위 70%</td>
+                                <td>월 최대 32만원</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-06-05</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P004</td>
+                                <td>청년도약계좌</td>
+                                <td>청년 지원</td>
+                                <td>만 19~34세</td>
+                                <td>5년간 매월 70만원 적립 시 정부지원금 지급</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-05-20</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P005</td>
+                                <td>장애인연금</td>
+                                <td>장애인 복지</td>
+                                <td>중증장애인</td>
+                                <td>기초급여 및 부가급여 지급</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-05-10</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P006</td>
+                                <td>청년 주거 안정 지원</td>
+                                <td>주거 지원</td>
+                                <td>만 19~39세 무주택 청년</td>
+                                <td>월 최대 20만원 임대료 지원</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-06-07</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P007</td>
+                                <td>코로나19 긴급 지원</td>
+                                <td>재난 지원</td>
+                                <td>모든 국민</td>
+                                <td>1인당 25만원 지급</td>
+                                <td><span class="status expired">만료됨</span></td>
+                                <td>2023-12-31</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P008</td>
+                                <td>국가장학금</td>
+                                <td>교육 지원</td>
+                                <td>대학생</td>
+                                <td>소득분위별 차등 지원</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-05-25</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P009</td>
+                                <td>의료급여</td>
+                                <td>의료 지원</td>
+                                <td>기초생활수급자</td>
+                                <td>의료비 지원</td>
+                                <td><span class="status active">활성</span></td>
+                                <td>2024-04-15</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="policy-select"></td>
+                                <td>P010</td>
+                                <td>취업성공패키지</td>
+                                <td>고용 지원</td>
+                                <td>구직자</td>
+                                <td>취업 지원 서비스 및 수당 지급</td>
+                                <td><span class="status draft">초안</span></td>
+                                <td>2024-06-03</td>
+                                <td>
+                                    <button class="btn-icon small" title="수정">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="삭제">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon small" title="상세보기">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="pagination">
+                        <button class="page-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <span class="page-ellipsis">...</span>
+                        <button class="page-btn">10</button>
+                        <button class="page-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="page-info">
+                        <span>1-10 / 총 125개 항목</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Policy Modal -->
+    <div class="modal" id="policyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>복지 정책 추가</h2>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="policyForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="policyName">정책명 *</label>
+                            <input type="text" id="policyName" name="policyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="policyCategory">카테고리 *</label>
+                            <select id="policyCategory" name="policyCategory" required>
+                                <option value="">카테고리 선택</option>
+                                <option value="육아">육아 지원</option>
+                                <option value="노인">노인 복지</option>
+                                <option value="청년">청년 지원</option>
+                                <option value="장애인">장애인 복지</option>
+                                <option value="고용">고용 지원</option>
+                                <option value="주거">주거 지원</option>
+                                <option value="교육">교육 지원</option>
+                                <option value="의료">의료 지원</option>
+                                <option value="재난">재난 지원</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="policyTarget">대상 *</label>
+                            <input type="text" id="policyTarget" name="policyTarget" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="policyStatus">상태 *</label>
+                            <select id="policyStatus" name="policyStatus" required>
+                                <option value="active">활성</option>
+                                <option value="inactive">비활성</option>
+                                <option value="draft">초안</option>
+                                <option value="expired">만료됨</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="policyBenefit">지원 내용 *</label>
+                        <input type="text" id="policyBenefit" name="policyBenefit" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="policyRequirements">신청 자격</label>
+                        <textarea id="policyRequirements" name="policyRequirements" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="policyDocuments">필요 서류</label>
+                        <textarea id="policyDocuments" name="policyDocuments" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="policyApplication">신청 방법</label>
+                        <textarea id="policyApplication" name="policyApplication" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="policyStartDate">시작일</label>
+                            <input type="date" id="policyStartDate" name="policyStartDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="policyEndDate">종료일</label>
+                            <input type="date" id="policyEndDate" name="policyEndDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="policyNotes">비고</label>
+                        <textarea id="policyNotes" name="policyNotes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelPolicyBtn">취소</button>
+                <button class="btn btn-primary" id="savePolicyBtn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

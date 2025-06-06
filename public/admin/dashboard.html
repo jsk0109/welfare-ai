@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드 - 복지정책 통합안내 관리자</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-panel">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i>
+                <span>복지정책 통합안내</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-info">
+                <h4>관리자</h4>
+                <p>최고 관리자</p>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>대시보드</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="policies.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>복지 정책 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="categories.html">
+                        <i class="fas fa-folder"></i>
+                        <span>카테고리 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inquiries.html">
+                        <i class="fas fa-question-circle"></i>
+                        <span>문의 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="chatbot.html">
+                        <i class="fas fa-robot"></i>
+                        <span>챗봇 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="users.html">
+                        <i class="fas fa-users"></i>
+                        <span>사용자 관리</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>설정</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>로그아웃</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="header">
+            <div class="header-left">
+                <h1>대시보드</h1>
+                <nav class="breadcrumb">
+                    <a href="dashboard.html">홈</a>
+                    <span>/</span>
+                    <span>대시보드</span>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="검색...">
+                </div>
+                <div class="notifications">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>관리자</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Overview Cards -->
+            <div class="overview-cards">
+                <div class="card stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>총 복지 정책</h3>
+                        <p class="stat-number">1,248</p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 24 (지난 달 대비)
+                        </p>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>챗봇 상담</h3>
+                        <p class="stat-number">52,147</p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% (지난 달 대비)
+                        </p>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>활성 사용자</h3>
+                        <p class="stat-number">8,591</p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8% (지난 달 대비)
+                        </p>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>미해결 문의</h3>
+                        <p class="stat-number">42</p>
+                        <p class="stat-change negative">
+                            <i class="fas fa-arrow-up"></i> 5 (지난 주 대비)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>챗봇 상담 통계</h2>
+                        <div class="card-actions">
+                            <button class="btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chatStatChart"></canvas>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>카테고리별 정책 수</h2>
+                        <div class="card-actions">
+                            <button class="btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="card recent-activities">
+                <div class="card-header">
+                    <h2>최근 활동</h2>
+                    <div class="card-actions">
+                        <button class="btn-text">모두 보기</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon blue">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>새 복지 정책 추가</h4>
+                                <p>청년 주거 안정 지원 사업이 추가되었습니다.</p>
+                                <span class="activity-time">방금 전</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon green">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>정책 정보 수정</h4>
+                                <p>아동수당 지급 대상 연령이 수정되었습니다.</p>
+                                <span class="activity-time">2시간 전</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon orange">
+                                <i class="fas fa-reply"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>문의 답변</h4>
+                                <p>장애인 복지 관련 문의에 답변이 등록되었습니다.</p>
+                                <span class="activity-time">5시간 전</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon purple">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>챗봇 응답 개선</h4>
+                                <p>노인 복지 관련 챗봇 응답이 개선되었습니다.</p>
+                                <span class="activity-time">어제</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon red">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="activity-details">
+                                <h4>만료된 정책 삭제</h4>
+                                <p>코로나19 긴급 지원 정책이 삭제되었습니다.</p>
+                                <span class="activity-time">어제</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Inquiries -->
+            <div class="card recent-inquiries">
+                <div class="card-header">
+                    <h2>최근 문의</h2>
+                    <div class="card-actions">
+                        <button class="btn-text">모두 보기</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>사용자</th>
+                                <th>제목</th>
+                                <th>카테고리</th>
+                                <th>상태</th>
+                                <th>날짜</th>
+                                <th>작업</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1092</td>
+                                <td>김민수</td>
+                                <td>육아휴직 지원금 관련 문의</td>
+                                <td>육아 지원</td>
+                                <td><span class="status pending">대기중</span></td>
+                                <td>2024-06-07</td>
+                                <td>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-reply"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#1091</td>
+                                <td>이지은</td>
+                                <td>장애인 연금 신청 방법</td>
+                                <td>장애인 복지</td>
+                                <td><span class="status pending">대기중</span></td>
+                                <td>2024-06-07</td>
+                                <td>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-reply"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#1090</td>
+                                <td>박준호</td>
+                                <td>청년 주거 지원 자격 문의</td>
+                                <td>청년 지원</td>
+                                <td><span class="status resolved">해결됨</span></td>
+                                <td>2024-06-06</td>
+                                <td>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#1089</td>
+                                <td>최영희</td>
+                                <td>기초연금 수령액 변경 문의</td>
+                                <td>노인 복지</td>
+                                <td><span class="status resolved">해결됨</span></td>
+                                <td>2024-06-06</td>
+                                <td>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#1088</td>
+                                <td>정현우</td>
+                                <td>실업급여 신청 서류 문의</td>
+                                <td>고용 지원</td>
+                                <td><span class="status resolved">해결됨</span></td>
+                                <td>2024-06-05</td>
+                                <td>
+                                    <button class="btn-icon small">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
